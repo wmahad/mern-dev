@@ -4,11 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev:server": "NODE_ENV=development npx nodemon server/app.js"
+    "dev:server": "NODE_ENV=development npx nodemon src/server/app.js"
   },
   "dependencies": {
     "bcrypt": "^2.0.1",
     "express": "^4.16.3",
+    "gravatar": "^1.6.0",
     "jsonwebtoken": "^8.2.2",
     "mongoose": "^5.1.4",
     "passport": "^0.4.0",
