@@ -1,5 +1,6 @@
 const express = require('express');
 const passport = require('passport');
+const { errorHandler } = require('../shared/middlewares');
 
 module.exports = (app, router) => {
     // set middlewares here
@@ -13,4 +14,6 @@ module.exports = (app, router) => {
     require('./auth')(router, passport);
     require('./profiles')(router);
     require('./posts')(router);
+
+    app.use(errorHandler);
 }

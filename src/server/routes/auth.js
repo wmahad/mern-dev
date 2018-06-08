@@ -1,9 +1,10 @@
 const gravatar = require('gravatar');
 const bcrypt = require('bcrypt');
 const User = require('mongoose').model('users');
+const { loginValidator, regValidator } = require('../shared/validators');
 
 module.exports = (router, passport) => {
-    router.post('/auth/register', async (req, res) => {
+    router.post('/auth/register', regValidator, async (req, res) => {
         let user = await User.findOne({ email: req.body.email });
         if (user) return res.status(400).json({ error: 'user already exists' });
         const avatar = await gravatar.url(req.body.email, { s: '200', r: 'pg', d: 'mm' });
@@ -19,7 +20,7 @@ module.exports = (router, passport) => {
         res.json(user);
     });
 
-    router.post('/auth/login', async (req, res) => {
+    router.post('/auth/login', loginValidator, async (req, res) => {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
         if (!user) return res.status(404).json({ error: 'user does not exists' });
