@@ -88,4 +88,10 @@ module.exports = (router) => {
         profile = await profile.save();
         return res.json(profile);
     });
+
+    router.delete('/profile', passPort, async (req, res) => {
+        await Profile.findOneAndRemove({ user: req.user.id });
+        await User.findOneAndRemove({ _id: req.user.id });
+        return res.json({success: true});
+    });
 }
