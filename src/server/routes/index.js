@@ -9,6 +9,8 @@ module.exports = (app, router) => {
     app.use(passport.initialize());
     app.use('/api', router);
 
+    app.get('*', (req, res) => res.render('index', { NODE_ENV: process.env.NODE_ENV }));
+
     // require the passport file.
     require('../services/passport')(passport);
     require('./auth')(router);
