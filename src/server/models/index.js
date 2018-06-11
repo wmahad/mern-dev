@@ -11,5 +11,6 @@ module.exports = () => {
 
     // load the models
     require('./user');
+    require('./post');
     require('./profile');
 }

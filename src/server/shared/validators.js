@@ -54,10 +54,17 @@ const eduSchema = {
     }
 }
 
+const postSchema = {
+    body: {
+        text: Joi.string().min(50).max(300).required(),
+    }
+}
+
 module.exports = {
     regValidator: joiValidator(registerSchema),
     loginValidator: joiValidator(loginSchema),
     profileValidator: joiValidator(profileSchema),
     expValidator: joiValidator(expSchema),
     eduValidator: joiValidator(eduSchema),
+    postValidator: joiValidator(postSchema),
 };

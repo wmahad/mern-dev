@@ -73,7 +73,7 @@ module.exports = (router) => {
         let profile = await Profile.findOne({ user: req.user.id });
         if (!profile) return res.status(404).json({ error: 'profile not found for user' });
         const removeIndex = profile.experience.findIndex(e => e.id === req.params.id);
-        if (!removeIndex) return res.status(400).json({error: 'experience does not exist'});
+        if (removeIndex === -1) return res.status(400).json({error: 'experience does not exist'});
         profile.experience.splice(removeIndex, 1);
         profile = await profile.save();
         return res.json(profile);
@@ -83,7 +83,7 @@ module.exports = (router) => {
         let profile = await Profile.findOne({ user: req.user.id });
         if (!profile) return res.status(404).json({ error: 'profile not found for user' });
         const removeIndex = profile.education.findIndex(e => e.id === req.params.id);
-        if (!removeIndex) return res.status(400).json({error: 'education does not exist'});
+        if (removeIndex === -1) return res.status(400).json({error: 'education does not exist'});
         profile.education.splice(removeIndex, 1);
         profile = await profile.save();
         return res.json(profile);
