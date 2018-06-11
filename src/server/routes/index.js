@@ -11,7 +11,7 @@ module.exports = (app, router) => {
 
     // require the passport file.
     require('../services/passport')(passport);
-    require('./auth')(router, passport);
+    require('./auth')(router);
     require('./profiles')(router);
     require('./posts')(router);
 
