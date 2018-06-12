@@ -16,5 +16,7 @@ require('./models')();
 // import routes
 require('./routes')(app, express.Router());
 
+app.get('*', (req, res) => res.render('index', { NODE_ENV: process.env.NODE_ENV }));
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`server listening on port ${port}`))

@@ -61,7 +61,7 @@ const postSchema = {
 }
 
 module.exports = {
-    regValidator: joiValidator(registerSchema),
+    regValidator: joiValidator(registerSchema, {allowUnknown: true}),
     loginValidator: joiValidator(loginSchema),
     profileValidator: joiValidator(profileSchema),
     expValidator: joiValidator(expSchema),
