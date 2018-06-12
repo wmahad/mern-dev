@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import axios from 'axios';
 
 class Register extends Component {
     constructor() {
@@ -20,12 +21,13 @@ class Register extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        const user = {
+        let user = {
             name: this.state.name,
             email: this.state.email,
             password: this.state.password,
             password2: this.state.password2,
         };
+        axios.post('/api/auth/register', user).then(u => console.log(u));
     }
 
     render() {
@@ -54,7 +56,7 @@ class Register extends Component {
                                         name='email'
                                         onChange={this.onChange}
                                         value={this.state.email} />
-                                    <small classNameName='form-text text-muted'>This site uses Gravatar so if you want a profile image, use a Gravatar email</small>
+                                    <small className='form-text text-muted'>This site uses Gravatar so if you want a profile image, use a Gravatar email</small>
                                 </div>
                                 <div className='form-group'>
                                     <input
