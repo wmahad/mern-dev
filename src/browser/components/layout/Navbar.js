@@ -1,8 +1,37 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logOutUser } from '../../actions/auth-actions';
 
 class Navbar extends Component {
+    onLogOut(e) {
+        e.preventDefault();
+        this.props.logOutUser();
+    }
+
     render() {
+        const { isAuthenticated, user } = this.props.auth;
+        const authLinks = (
+            <ul className='navbar-nav ml-auto'>
+                <li className='nav-item'>
+                    <Link className='nav-link' to='/dasboard'>Dasboard</Link>
+                </li>
+                <li className='nav-item'>
+                    <a className='nav-link' onClick={this.onLogOut.bind(this)}>Logout </a>
+                </li>
+            </ul>
+        );
+
+        const guestLinks = (
+            <ul className='navbar-nav ml-auto'>
+                <li className='nav-item'>
+                    <Link className='nav-link' to='/register'>Sign Up</Link>
+                </li>
+                <li className='nav-item'>
+                    <Link className='nav-link' to='/login'>Login</Link>
+                </li>
+            </ul>
+        );
         return (
             <nav className='navbar navbar-expand-sm navbar-dark bg-dark mb-4'>
                 <div className='container'>
@@ -18,14 +47,7 @@ class Navbar extends Component {
                             </li>
                         </ul>
 
-                        <ul className='navbar-nav ml-auto'>
-                            <li className='nav-item'>
-                                <Link className='nav-link' to='/register'>Sign Up</Link>
-                            </li>
-                            <li className='nav-item'>
-                                <Link className='nav-link' to='/login'>Login</Link>
-                            </li>
-                        </ul>
+                        { isAuthenticated ? authLinks : guestLinks }
                     </div>
                 </div>
             </nav>
@@ -33,4 +55,8 @@ class Navbar extends Component {
     }
 }
 
-export default Navbar;
+const mapStateToProps = state => ({
+    auth: state.auth,
+})
+
+export default connect(mapStateToProps, { logOutUser })(Navbar);
