@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './utils/setauthtoken';
-import { setCurrentUser, logOutUser } from './actions/auth-actions'
+import { setCurrentUser, logOutUser } from './actions/auth'
 
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
